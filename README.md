@@ -201,8 +201,10 @@
     </div>
 
     <script>
+        // Variable para almacenar usuarios registrados
         let users = [];
 
+        // Mostrar pantallas
         function showWelcome() {
             toggleVisibility("welcome-screen");
         }
@@ -232,18 +234,25 @@
             document.getElementById(id).classList.remove("hidden");
         }
 
+        // Función de registro
         function registerUser() {
             const email = document.getElementById("register-email").value;
             const password = document.getElementById("register-password").value;
             if (email && password) {
-                users.push({ email, password });
-                alert("Registro exitoso. Ahora puedes iniciar sesión.");
-                showLogin();
+                const existingUser = users.find(user => user.email === email);
+                if (existingUser) {
+                    alert("El correo ya está registrado.");
+                } else {
+                    users.push({ email, password });
+                    alert("Registro exitoso. Ahora puedes iniciar sesión.");
+                    showLogin();
+                }
             } else {
                 alert("Por favor, completa todos los campos.");
             }
         }
 
+        // Función de inicio de sesión
         function loginUser() {
             const email = document.getElementById("login-email").value;
             const password = document.getElementById("login-password").value;
@@ -256,6 +265,7 @@
             }
         }
 
+        // Función de recuperación de contraseña
         function forgotPassword() {
             const email = prompt("Ingresa tu correo electrónico:");
             const user = users.find(u => u.email === email);
@@ -263,6 +273,23 @@
                 alert(`Tu contraseña es: ${user.password}`);
             } else {
                 alert("Correo no registrado.");
+            }
+        }
+
+        // Función para guardar la encuesta
+        function saveSurvey() {
+            const q1 = document.getElementById("q1").value;
+            const q2 = document.getElementById("q2").value;
+            if (q1 && q2) {
+                document.getElementById("survey-results").innerHTML = `
+                    <h4>Resultados de la Encuesta:</h4>
+                    <p><strong>Pregunta 1:</strong> ${q1}</p>
+                    <p><strong>Pregunta 2:</strong> ${q2}</p>
+                `;
+                alert("Encuesta guardada.");
+                showMainInterface();
+            } else {
+                alert("Por favor, completa todas las preguntas.");
             }
         }
     </script>
