@@ -3,293 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tu Salud es Nuestra Prioridad</title>
+    <title>Registro e Inicio de Sesión</title>
     <style>
-        /* General */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            background: linear-gradient(135deg, #43cea2, #185a9d);
-            color: #333;
-        }
-
-        h1, h2, h3 {
-            color: #ffffff;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        p {
-            color: #ffffff;
-            font-size: 1.2em;
-            margin-bottom: 10px;
-        }
-
-        /* Encabezado */
-        .header {
-            text-align: center;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.3);
-            border-bottom: 5px solid #ffffff;
-        }
-
-        .header img {
-            width: 80px;
-            margin-bottom: 10px;
-        }
-
-        /* Contenedores */
-        .container {
+            font-family: Arial, sans-serif;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        h1 {
+            font-size: 1.5em;
             text-align: center;
-            padding: 20px;
+            margin-bottom: 20px;
         }
-
-        .hidden {
-            display: none;
-        }
-
-        .interface-container {
-            padding: 20px;
-            text-align: center;
-        }
-
-        .section-container {
-            max-width: 700px;
-            margin: 20px auto;
-            background: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .section-container h3 {
-            color: #185a9d;
-            margin-bottom: 15px;
-        }
-
         label {
+            display: block;
+            margin-bottom: 8px;
             font-weight: bold;
-            color: #185a9d;
         }
-
-        /* Botones */
-        button {
-            padding: 10px 20px;
-            font-size: 1em;
-            border: none;
-            border-radius: 5px;
-            margin: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease-in-out;
-        }
-
-        button.primary {
-            background-color: #185a9d;
-            color: white;
-        }
-
-        button.secondary {
-            background-color: #6c757d;
-            color: white;
-        }
-
-        button:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
-        }
-
-        /* Inputs */
         input {
             width: 100%;
             padding: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            font-size: 1em;
         }
-
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .link {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .link a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        .link a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
-    <!-- Encabezado -->
-    <div class="header">
-        <img src="https://via.placeholder.com/80" alt="Logo">
-        <h1>Tu Salud es Nuestra Prioridad</h1>
-        <p>Protegiendo tu bienestar, paso a paso.</p>
-    </div>
-
-    <!-- Página principal -->
-    <div class="container" id="welcome-screen">
-        <h2>Bienvenido</h2>
-        <p>Elige una opción para continuar.</p>
-        <button class="primary" onclick="showLogin()">Iniciar Sesión</button>
-        <button class="secondary" onclick="showRegister()">Registrarse</button>
-    </div>
-
-    <!-- Registro -->
-    <div class="container hidden" id="register-screen">
-        <h2>Registrarse</h2>
-        <form id="register-form">
-            <input type="email" id="register-email" placeholder="Correo electrónico" required>
-            <input type="password" id="register-password" placeholder="Contraseña" required>
-            <button type="button" class="primary" onclick="registerUser()">Registrarse</button>
-            <button type="button" class="secondary" onclick="showWelcome()">Volver</button>
+    <div class="container" id="login-form">
+        <h1>Iniciar Sesión</h1>
+        <form id="form-login">
+            <label for="email-login">Correo Electrónico</label>
+            <input type="email" id="email-login" name="email-login" placeholder="Ingresa tu correo" required>
+            
+            <label for="password-login">Contraseña</label>
+            <input type="password" id="password-login" name="password-login" placeholder="Ingresa tu contraseña" required>
+            
+            <button type="button" onclick="login()">Ingresar</button>
         </form>
+        <div class="link">
+            <a href="#" onclick="showResetPassword()">¿Olvidaste tu contraseña?</a>
+        </div>
+        <div class="link">
+            <a href="#" onclick="showRegister()">¿No tienes cuenta? Regístrate</a>
+        </div>
     </div>
 
-    <!-- Inicio de sesión -->
-    <div class="container hidden" id="login-screen">
-        <h2>Iniciar Sesión</h2>
-        <form id="login-form">
-            <input type="email" id="login-email" placeholder="Correo electrónico" required>
-            <input type="password" id="login-password" placeholder="Contraseña" required>
-            <button type="button" class="primary" onclick="loginUser()">Iniciar Sesión</button>
-            <button type="button" class="secondary" onclick="showWelcome()">Volver</button>
+    <div class="container" id="register-form" style="display: none;">
+        <h1>Registro</h1>
+        <form id="form-register">
+            <label for="email-register">Correo Electrónico</label>
+            <input type="email" id="email-register" name="email-register" placeholder="Ingresa tu correo" required>
+            
+            <label for="password-register">Contraseña</label>
+            <input type="password" id="password-register" name="password-register" placeholder="Crea tu contraseña" required>
+            
+            <button type="button" onclick="register()">Registrarse</button>
         </form>
-        <button class="secondary" onclick="forgotPassword()">Olvidé mi contraseña</button>
-    </div>
-
-    <!-- Página principal después de iniciar sesión -->
-    <div class="container hidden" id="main-interface">
-        <h2>Bienvenido a tu perfil</h2>
-        <button class="primary" onclick="showSurvey()">Encuestas</button>
-        <button class="secondary" onclick="showMonitoring()">Monitoreo</button>
-    </div>
-
-    <!-- Encuesta -->
-    <div class="interface-container hidden" id="survey-section">
-        <div class="section-container">
-            <h3>Encuesta de Prevención del Dengue</h3>
-            <form id="survey-form">
-                <label for="q1">1. ¿Qué medidas tomas para prevenir el dengue?</label>
-                <textarea id="q1" placeholder="Escribe tu respuesta aquí..."></textarea>
-
-                <label for="q2">2. ¿Conoces los síntomas más comunes del dengue?</label>
-                <textarea id="q2" placeholder="Escribe tu respuesta aquí..."></textarea>
-
-                <button type="button" class="primary" onclick="saveSurvey()">Guardar Encuesta</button>
-                <button type="button" class="secondary" onclick="showMainInterface()">Volver</button>
-            </form>
-            <div id="survey-results" style="margin-top: 20px;"></div>
+        <div class="link">
+            <a href="#" onclick="showLogin()">Ya tengo una cuenta</a>
         </div>
     </div>
 
-    <!-- Sección de Monitoreo -->
-    <div class="interface-container hidden" id="monitoring-section">
-        <div class="section-container">
-            <h3>Cómo prevenirlo</h3>
-            <p>- Eliminar criaderos</p>
-            <p>- Uso de insecticidas</p>
-            <p>- Protección personal</p>
+    <div class="container" id="reset-form" style="display: none;">
+        <h1>Recuperar Contraseña</h1>
+        <form id="form-reset">
+            <label for="email-reset">Correo Electrónico</label>
+            <input type="email" id="email-reset" name="email-reset" placeholder="Ingresa tu correo" required>
+            
+            <button type="button" onclick="resetPassword()">Recuperar</button>
+        </form>
+        <div class="link">
+            <a href="#" onclick="showLogin()">Volver al inicio de sesión</a>
         </div>
-        <div class="section-container">
-            <h3>Síntomas</h3>
-            <p>- Fiebre</p>
-            <p>- Erupciones cutáneas</p>
-        </div>
-        <button class="secondary" onclick="showMainInterface()">Volver</button>
     </div>
 
     <script>
-        // Variable para almacenar usuarios registrados
-        let users = [];
+        // Simulación de una base de datos
+        const users = {};
 
-        // Mostrar pantallas
-        function showWelcome() {
-            toggleVisibility("welcome-screen");
+        // Mostrar formularios
+        function showLogin() {
+            document.getElementById("login-form").style.display = "block";
+            document.getElementById("register-form").style.display = "none";
+            document.getElementById("reset-form").style.display = "none";
         }
 
         function showRegister() {
-            toggleVisibility("register-screen");
+            document.getElementById("login-form").style.display = "none";
+            document.getElementById("register-form").style.display = "block";
+            document.getElementById("reset-form").style.display = "none";
         }
 
-        function showLogin() {
-            toggleVisibility("login-screen");
+        function showResetPassword() {
+            document.getElementById("login-form").style.display = "none";
+            document.getElementById("register-form").style.display = "none";
+            document.getElementById("reset-form").style.display = "block";
         }
 
-        function showMainInterface() {
-            toggleVisibility("main-interface");
-        }
+        // Función para registrar un usuario
+        function register() {
+            const email = document.getElementById("email-register").value;
+            const password = document.getElementById("password-register").value;
 
-        function showSurvey() {
-            toggleVisibility("survey-section");
-        }
-
-        function showMonitoring() {
-            toggleVisibility("monitoring-section");
-        }
-
-        function toggleVisibility(id) {
-            document.querySelectorAll(".container, .interface-container").forEach(el => el.classList.add("hidden"));
-            document.getElementById(id).classList.remove("hidden");
-        }
-
-        // Función de registro
-        function registerUser() {
-            const email = document.getElementById("register-email").value;
-            const password = document.getElementById("register-password").value;
-            if (email && password) {
-                const existingUser = users.find(user => user.email === email);
-                if (existingUser) {
-                    alert("El correo ya está registrado.");
-                } else {
-                    users.push({ email, password });
-                    alert("Registro exitoso. Ahora puedes iniciar sesión.");
-                    showLogin();
-                }
+            if (users[email]) {
+                alert("Este correo ya está registrado.");
             } else {
-                alert("Por favor, completa todos los campos.");
+                users[email] = password;
+                alert("Registro exitoso.");
+                showLogin();
             }
         }
 
-        // Función de inicio de sesión
-        function loginUser() {
-            const email = document.getElementById("login-email").value;
-            const password = document.getElementById("login-password").value;
-            const user = users.find(u => u.email === email && u.password === password);
-            if (user) {
+        // Función para iniciar sesión
+        function login() {
+            const email = document.getElementById("email-login").value;
+            const password = document.getElementById("password-login").value;
+
+            if (users[email] && users[email] === password) {
                 alert("Inicio de sesión exitoso.");
-                showMainInterface();
             } else {
-                alert("Credenciales incorrectas.");
+                alert("Correo o contraseña incorrectos.");
             }
         }
 
-        // Función de recuperación de contraseña
-        function forgotPassword() {
-            const email = prompt("Ingresa tu correo electrónico:");
-            const user = users.find(u => u.email === email);
-            if (user) {
-                alert(`Tu contraseña es: ${user.password}`);
+        // Función para recuperar contraseña
+        function resetPassword() {
+            const email = document.getElementById("email-reset").value;
+
+            if (users[email]) {
+                alert(`Tu contraseña es: ${users[email]}`);
             } else {
                 alert("Correo no registrado.");
-            }
-        }
-
-        // Función para guardar la encuesta
-        function saveSurvey() {
-            const q1 = document.getElementById("q1").value;
-            const q2 = document.getElementById("q2").value;
-            if (q1 && q2) {
-                document.getElementById("survey-results").innerHTML = `
-                    <h4>Resultados de la Encuesta:</h4>
-                    <p><strong>Pregunta 1:</strong> ${q1}</p>
-                    <p><strong>Pregunta 2:</strong> ${q2}</p>
-                `;
-                alert("Encuesta guardada.");
-                showMainInterface();
-            } else {
-                alert("Por favor, completa todas las preguntas.");
             }
         }
     </script>
