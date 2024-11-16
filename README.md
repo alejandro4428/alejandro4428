@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Salud - Encuesta</title>
+    <title>Tu Salud es Nuestra Prioridad</title>
     <style>
         /* General */
         * {
@@ -15,13 +15,32 @@
         body {
             font-family: 'Arial', sans-serif;
             line-height: 1.6;
-            background: linear-gradient(135deg, #56CCF2, #2F80ED);
+            background: linear-gradient(135deg, #43cea2, #185a9d);
             color: #333;
         }
 
         h1, h2, h3 {
             color: #ffffff;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        p {
+            color: #ffffff;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        /* Encabezado */
+        .header {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-bottom: 5px solid #ffffff;
+        }
+
+        .header img {
+            width: 80px;
+            margin-bottom: 10px;
         }
 
         /* Contenedores */
@@ -45,7 +64,7 @@
         }
 
         .section-container {
-            max-width: 600px;
+            max-width: 700px;
             margin: 20px auto;
             background: #ffffff;
             padding: 20px;
@@ -54,13 +73,13 @@
         }
 
         .section-container h3 {
-            color: #2F80ED;
+            color: #185a9d;
             margin-bottom: 15px;
         }
 
-        p {
-            font-size: 1em;
-            margin-bottom: 10px;
+        label {
+            font-weight: bold;
+            color: #185a9d;
         }
 
         /* Botones */
@@ -75,7 +94,7 @@
         }
 
         button.primary {
-            background-color: #2F80ED;
+            background-color: #185a9d;
             color: white;
         }
 
@@ -89,7 +108,7 @@
             transform: translateY(-2px);
         }
 
-        /* Inputs y Textareas */
+        /* Inputs */
         input, textarea {
             width: 100%;
             padding: 10px;
@@ -102,35 +121,14 @@
         textarea {
             height: 80px;
         }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        /* Encabezados */
-        .header {
-            text-align: center;
-            padding: 20px;
-        }
-
-        .header img {
-            width: 100px;
-        }
-
-        .header p {
-            color: white;
-            font-size: 1.2em;
-        }
     </style>
 </head>
 <body>
     <!-- Encabezado -->
     <div class="header">
-        <img src="https://via.placeholder.com/100" alt="Logo">
+        <img src="https://via.placeholder.com/80" alt="Logo">
         <h1>Tu Salud es Nuestra Prioridad</h1>
-        <p>Protegemos tu salud y te ayudamos a prevenir enfermedades.</p>
+        <p>Protegiendo tu bienestar, paso a paso.</p>
     </div>
 
     <!-- Página principal -->
@@ -144,16 +142,22 @@
     <!-- Encuesta -->
     <div class="interface-container hidden" id="survey-section">
         <div class="section-container">
-            <h3>Encuesta de Prevención</h3>
+            <h3>Encuesta de Prevención del Dengue</h3>
             <form id="survey-form">
                 <label for="q1">1. ¿Qué medidas tomas para prevenir el dengue?</label>
                 <textarea id="q1" placeholder="Escribe tu respuesta aquí..."></textarea>
 
-                <label for="q2">2. ¿Sabes identificar los síntomas del dengue?</label>
+                <label for="q2">2. ¿Conoces los síntomas más comunes del dengue?</label>
                 <textarea id="q2" placeholder="Escribe tu respuesta aquí..."></textarea>
 
-                <label for="q3">3. ¿Qué acciones realizarías para educar a tu comunidad sobre el dengue?</label>
+                <label for="q3">3. ¿Has eliminado criaderos de mosquitos en tu hogar?</label>
                 <textarea id="q3" placeholder="Escribe tu respuesta aquí..."></textarea>
+
+                <label for="q4">4. ¿Usas insecticidas o repelentes regularmente?</label>
+                <textarea id="q4" placeholder="Escribe tu respuesta aquí..."></textarea>
+
+                <label for="q5">5. ¿Consideras importante informar a la comunidad sobre el dengue?</label>
+                <textarea id="q5" placeholder="Escribe tu respuesta aquí..."></textarea>
 
                 <button type="button" class="primary" onclick="saveSurvey()">Guardar Encuesta</button>
                 <button type="button" class="secondary" onclick="showMainInterface()">Volver</button>
@@ -205,22 +209,22 @@
 
         // Guardar encuesta
         function saveSurvey() {
-            const q1 = document.getElementById("q1").value.trim();
-            const q2 = document.getElementById("q2").value.trim();
-            const q3 = document.getElementById("q3").value.trim();
-
-            if (q1 && q2 && q3) {
-                const results = `
-                    <h4>Respuestas Guardadas:</h4>
-                    <p><strong>1:</strong> ${q1}</p>
-                    <p><strong>2:</strong> ${q2}</p>
-                    <p><strong>3:</strong> ${q3}</p>
-                `;
-                document.getElementById("survey-results").innerHTML = results;
-                document.getElementById("survey-form").reset();
-            } else {
-                alert("Por favor, responde todas las preguntas.");
+            const responses = [];
+            for (let i = 1; i <= 5; i++) {
+                const answer = document.getElementById(`q${i}`).value.trim();
+                if (!answer) {
+                    alert("Por favor, responde todas las preguntas.");
+                    return;
+                }
+                responses.push(answer);
             }
+
+            const results = `
+                <h4>Respuestas Guardadas:</h4>
+                ${responses.map((res, idx) => `<p><strong>${idx + 1}:</strong> ${res}</p>`).join("")}
+            `;
+            document.getElementById("survey-results").innerHTML = results;
+            document.getElementById("survey-form").reset();
         }
     </script>
 </body>
