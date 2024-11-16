@@ -21,35 +21,22 @@
 
         h1, h2, h3 {
             color: #ffffff;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
         }
 
         p {
             color: #ffffff;
-            font-size: 1.2em;
+            font-size: 1em;
             margin-bottom: 10px;
         }
 
-        /* Encabezado */
-        .header {
-            text-align: center;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.3);
-            border-bottom: 5px solid #ffffff;
-        }
-
-        .header img {
-            width: 80px;
-            margin-bottom: 10px;
-        }
-
-        /* Contenedores */
+        /* Contenedores principales */
         .container {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             text-align: center;
             padding: 20px;
         }
@@ -58,23 +45,21 @@
             display: none;
         }
 
-        .interface-container {
-            padding: 20px;
-            text-align: center;
-        }
-
+        /* Contenido dentro de las secciones */
         .section-container {
-            max-width: 700px;
-            margin: 20px auto;
+            width: 90%;
+            max-width: 600px;
+            margin: 10px auto;
             background: #ffffff;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: left;
         }
 
         .section-container h3 {
             color: #185a9d;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         label {
@@ -109,40 +94,37 @@
         }
 
         /* Inputs */
-        input {
+        input, textarea {
             width: 100%;
             padding: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             border: 1px solid #ccc;
             border-radius: 5px;
             font-size: 1em;
         }
 
-        /* Textarea */
-        textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 1em;
-            margin-bottom: 20px;
-            height: 100px;
-        }
+        /* Responsividad */
+        @media (max-width: 768px) {
+            h1, h2 {
+                font-size: 1.5em;
+            }
 
+            button {
+                font-size: 0.9em;
+                padding: 8px 15px;
+            }
+
+            .section-container {
+                padding: 15px;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Encabezado -->
-    <div class="header">
-        <img src="https://via.placeholder.com/80" alt="Logo">
-        <h1>Tu Salud es Nuestra Prioridad</h1>
-        <p>Protegiendo tu bienestar, paso a paso.</p>
-    </div>
-
     <!-- Página principal -->
     <div class="container" id="welcome-screen">
-        <h2>Bienvenido</h2>
-        <p>Elige una opción para continuar.</p>
+        <h1>Tu Salud es Nuestra Prioridad</h1>
+        <p>Protegiendo tu bienestar, paso a paso.</p>
         <button class="primary" onclick="showLogin()">Iniciar Sesión</button>
         <button class="secondary" onclick="showRegister()">Registrarse</button>
     </div>
@@ -150,7 +132,7 @@
     <!-- Registro -->
     <div class="container hidden" id="register-screen">
         <h2>Registrarse</h2>
-        <form id="register-form">
+        <form>
             <input type="email" id="register-email" placeholder="Correo electrónico" required>
             <input type="password" id="register-password" placeholder="Contraseña" required>
             <button type="button" class="primary" onclick="registerUser()">Registrarse</button>
@@ -161,7 +143,7 @@
     <!-- Inicio de sesión -->
     <div class="container hidden" id="login-screen">
         <h2>Iniciar Sesión</h2>
-        <form id="login-form">
+        <form>
             <input type="email" id="login-email" placeholder="Correo electrónico" required>
             <input type="password" id="login-password" placeholder="Contraseña" required>
             <button type="button" class="primary" onclick="loginUser()">Iniciar Sesión</button>
@@ -178,10 +160,10 @@
     </div>
 
     <!-- Encuesta -->
-    <div class="interface-container hidden" id="survey-section">
+    <div class="container hidden" id="survey-section">
         <div class="section-container">
             <h3>Encuesta de Prevención del Dengue</h3>
-            <form id="survey-form">
+            <form>
                 <label for="q1">1. ¿Qué medidas tomas para prevenir el dengue?</label>
                 <textarea id="q1" placeholder="Escribe tu respuesta aquí..."></textarea>
 
@@ -194,17 +176,18 @@
                 <button type="button" class="primary" onclick="saveSurvey()">Guardar Encuesta</button>
                 <button type="button" class="secondary" onclick="showMainInterface()">Volver</button>
             </form>
-            <div id="survey-results" style="margin-top: 20px;"></div>
         </div>
     </div>
 
-    <!-- Sección de Monitoreo -->
-    <div class="interface-container hidden" id="monitoring-section">
+    <!-- Monitoreo -->
+    <div class="container hidden" id="monitoring-section">
         <div class="section-container">
             <h3>¿Cómo prevenir el dengue?</h3>
-            <p>- Eliminar criaderos</p>
-            <p>- Uso de insecticidas</p>
-            <p>- Protección personal</p>
+            <ul>
+                <li>Eliminar criaderos</li>
+                <li>Uso de insecticidas</li>
+                <li>Protección personal</li>
+            </ul>
         </div>
         <div class="section-container">
             <h3>Síntomas</h3>
@@ -217,16 +200,16 @@
         </div>
         <div class="section-container">
             <h3>¿Cómo se contagia?</h3>
-            <p>El dengue se transmite a través de la picadura de mosquitos infectados que pican a una persona infectada y luego pueden transmitir el virus a otras personas.</p>
+            <p>El dengue se transmite cuando un mosquito pica a una persona infectada, adquiere el virus y posteriormente puede transmitirlo al picar a otras personas.</p>
         </div>
         <button class="secondary" onclick="showMainInterface()">Volver</button>
     </div>
 
     <script>
-        // Variable para almacenar usuarios registrados
+        // Variables globales
         let users = [];
 
-        // Mostrar pantallas
+        // Funciones de navegación
         function showWelcome() {
             toggleVisibility("welcome-screen");
         }
@@ -252,71 +235,46 @@
         }
 
         function toggleVisibility(id) {
-            document.querySelectorAll(".container, .interface-container").forEach(el => el.classList.add("hidden"));
+            document.querySelectorAll(".container").forEach(el => el.classList.add("hidden"));
             document.getElementById(id).classList.remove("hidden");
         }
 
-        // Función de registro
+        // Registro de usuario
         function registerUser() {
             const email = document.getElementById("register-email").value;
             const password = document.getElementById("register-password").value;
-
-            if (email && password) {
-                const existingUser = users.find(u => u.email === email);
-                if (existingUser) {
-                    alert("Este correo ya está registrado.");
-                } else {
-                    users.push({ email, password });
-                    alert("Registro exitoso.");
-                    showWelcome();
-                }
+            if (users.some(u => u.email === email)) {
+                alert("Este correo ya está registrado.");
             } else {
-                alert("Por favor, complete todos los campos.");
+                users.push({ email, password });
+                alert("Registro exitoso.");
+                showWelcome();
             }
         }
 
-        // Función de inicio de sesión
+        // Inicio de sesión
         function loginUser() {
             const email = document.getElementById("login-email").value;
             const password = document.getElementById("login-password").value;
-
             const user = users.find(u => u.email === email && u.password === password);
             if (user) {
-                alert("Inicio de sesión exitoso.");
                 showMainInterface();
             } else {
                 alert("Credenciales incorrectas.");
             }
         }
 
-        // Función de recuperación de contraseña
+        // Recuperación de contraseña
         function forgotPassword() {
-            const email = prompt("Ingresa tu correo electrónico:");
+            const email = prompt("Ingresa tu correo:");
             const user = users.find(u => u.email === email);
-            if (user) {
-                alert(`Tu contraseña es: ${user.password}`);
-            } else {
-                alert("Correo no registrado.");
-            }
+            alert(user ? `Tu contraseña es: ${user.password}` : "Correo no registrado.");
         }
 
-        // Función para guardar la encuesta
+        // Guardar encuesta
         function saveSurvey() {
-            const q1 = document.getElementById("q1").value;
-            const q2 = document.getElementById("q2").value;
-            const q3 = document.getElementById("q3").value;
-            if (q1 && q2 && q3) {
-                document.getElementById("survey-results").innerHTML = `
-                    <h4>Resultados de la Encuesta:</h4>
-                    <p><strong>Pregunta 1:</strong> ${q1}</p>
-                    <p><strong>Pregunta 2:</strong> ${q2}</p>
-                    <p><strong>Pregunta 3:</strong> ${q3}</p>
-                `;
-                alert("Encuesta guardada.");
-                showMainInterface();
-            } else {
-                alert("Por favor, completa todas las preguntas.");
-            }
+            alert("Encuesta guardada con éxito.");
+            showMainInterface();
         }
     </script>
 </body>
